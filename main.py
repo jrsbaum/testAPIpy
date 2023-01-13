@@ -1,19 +1,22 @@
 import requests
 import json
-
+import product
 
 def get_dados():
     request = requests.get("http://localhost:3000/produtos")
-    product = json.loads(request.content)
-    print(product)  # pegando todos itens da lista
+    produtos = json.loads(request.content)
+    for produto in produtos:
+        print(produto)
 
 def get_dados_id(id):
-    request = requests.get(f"viacep.com.br/ws/01001000/json/")
-    product = json.loads(request.content)
-    print(product[4]['nome'])  # pegando so o nome do segundo item da lista (Coca cola 350ml)
+    request = requests.get(f"http://localhost:3000/produtos/{id}")
+    produto = json.loads(request.content)
+    print(produto['nome'])
 
+def post_dados(product):
+    requests.post("http://localhost:3000/produtos", json=product.__dict__)
 
-# pegando dados por id
 if __name__ == '__main__':
+    post_dados(product.Product("Fruki", "Frukizao laranja", "7.5"))
     get_dados()
-    get_dados_id()
+    get_dados_id("4")
