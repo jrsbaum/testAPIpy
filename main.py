@@ -22,8 +22,13 @@ def post_dados(product):
 def put_dados(id, product):
     requests.put(f"http://localhost:3000/produtos/{id}", json=product.__dict__)
 
+def delete_dados(id):
+    requests.delete(f"http://localhost:3000/produtos/{id}")
+    print(f"dadinho {id} deletadinho")
+
 if __name__ == '__main__':
     get_dados()
     post_dados(product.Product("Fruki", "Frukizao laranja", "7.5"))
     put_dados("4", product.Product("FrukiEDITED", "Frukizao laranjaEDITED", "7.6"))
     get_dados_id("4")
+    delete_dados("6")
